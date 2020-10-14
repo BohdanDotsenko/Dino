@@ -1,7 +1,29 @@
+main/Obstacles.java
+ main.Obstacles
+ main.Obstacles$1
+ main.Obstacles$2
+main/Score.java
+ main.Score
+ main.Score$1
 main/StartGame.java
  main.StartGame
+ main.gameOver
+main/Ground.java
+ main.Ground
+main/Main.java
+ main.Main
 main/Menu.java
  main.Menu
  main.MenuBox
  main.MenuItem
  main.SubMenu
+main/Clouds.java
+ main.Clouds
+ main.Clouds$1
+main/Dino.java
+ main.Dino
+ main.Dino$1
+ main.Dino$2
+ main.Dino$3
+ main.Dino$4
+ main.Dino$4$1

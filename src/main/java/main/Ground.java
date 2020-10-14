@@ -13,6 +13,7 @@ import javafx.util.Duration;
 class Ground extends Pane {
     public Pane pane;
     protected Image groundImg = new Image("Ground.png");
+    private Timeline t;
     protected ImageView groundOne = new ImageView(this.groundImg);
     protected ImageView groundTwo = new ImageView(this.groundImg);
     public Ground(Pane pane) {
@@ -31,12 +32,13 @@ class Ground extends Pane {
     }
 
     protected void animation() {
-        Timeline t = new Timeline(
+        t = new Timeline(
                 new KeyFrame(Duration.seconds(6), new KeyValue(groundOne.translateXProperty(), -1200)),
                 new KeyFrame(Duration.seconds(6), new KeyValue(groundTwo.translateXProperty(), -1200))
         );
         t.setCycleCount(Timeline.INDEFINITE);
         t.play();
     }
+
 }
 

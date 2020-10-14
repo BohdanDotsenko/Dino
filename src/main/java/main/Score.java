@@ -36,7 +36,7 @@ class Score extends Pane {
         RunTime.play();
         pane.getChildren().addAll(score);
     }
-    public int GetScore (int i) {
+    public int GetScore () {
         return i;
     }
 }

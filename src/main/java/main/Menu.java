@@ -22,7 +22,9 @@ import javafx.util.Duration;
 public class Menu {
     public Stage primaryStage;
     public Pane pane;
-    public Menu(Pane pane, Stage primaryStage) {
+    private Dino dino;
+    public Menu(Pane pane, Stage primaryStage, Dino dino) {
+        this.dino = dino;
         this.pane = pane;
         this.primaryStage = primaryStage;
         MenuItem Start = new MenuItem("Start");
@@ -37,7 +39,7 @@ public class Menu {
         MenuBox menuBox = new MenuBox(mainMenu);
         Start.setOnMouseClicked(event -> {
             menuBox.setVisible(false);
-            new StartGame(pane, primaryStage);
+            new StartGame(pane, primaryStage, dino);
         });
         pane.getChildren().addAll(menuBox);
     }

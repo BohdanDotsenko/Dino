@@ -5,6 +5,7 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
@@ -13,7 +14,8 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
-class Dino extends Pane {
+
+public class Dino extends Pane {
     public Pane pane;
     public Image DinoLeft = new Image("Dino-left-up.png");
     public ImageView DinoLView = new ImageView(this.DinoLeft);
@@ -21,16 +23,19 @@ class Dino extends Pane {
     public AnimationTimer JumpTimer;
     public boolean readyJump = true;
     public int gravity = 0;
+    private Obstacles obstacles;
 
     public Dino(Pane pane, Stage stage) {
+
         DinoLView.setLayoutY(720);
         DinoLView.setLayoutX(30);
         this.pane = pane;
         this.animation(RunTime);
         this.pane.getChildren().add(DinoLView);
-        this.jump(stage);
+        jump(stage);
     }
     public Timeline animation( Timeline runTime) {
+
         RunTime = new Timeline(
                 new KeyFrame(Duration.millis(250), new EventHandler<ActionEvent>() {
                     @Override
@@ -50,8 +55,27 @@ class Dino extends Pane {
         return runTime;
     }
 
+    private void installEventHandler(Pane pane) {
+
+        final EventHandler<KeyEvent> keyEventHandler =
+                new EventHandler<KeyEvent>() {
+                    public void handle(final KeyEvent keyEvent) {
+                        if (keyEvent.getCode() == KeyCode.ENTER) {
+                            setPressed(keyEvent.getEventType()
+                                    == KeyEvent.KEY_PRESSED);
+                            System.out.println("Enter");
+                            keyEvent.consume();
+                        }
+                    }
+                };
+
+        pane.setOnKeyPressed(keyEventHandler);
+        pane.setOnKeyReleased(keyEventHandler);
+    }
+
     public void jump(Stage stage) {
-        stage.addEventFilter(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>() {
+        stage.addEventHandler(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>() {
+            @Override
             public void handle(KeyEvent key) {
                 if (key.getCode() == KeyCode.SPACE && gravity == 0) {
                     RunTime.pause();
@@ -59,6 +83,10 @@ class Dino extends Pane {
                     JumpTimer = new AnimationTimer() {
                         @Override
                         public void handle(long now) {
+//                            if(!obstacles.collision()) {
+//                                JumpTimer.stop();
+//                                RunTime.pause();
+//                            }
                             gravity += 1;
                             DinoLView.setTranslateY(DinoLView.getTranslateY() - 18 + gravity);
                             if (groundPos <= DinoLView.getTranslateY()) {

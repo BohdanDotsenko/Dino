@@ -12,7 +12,7 @@ import javafx.stage.Stage;
 public class Main extends Application {
     public static int score;
     public Label scoreLabel = new Label("Score : " + score);
-    public Object Dino;
+    private Dino dino;
 
     @Override
     public void start(Stage primaryStage) throws Exception{
@@ -20,7 +20,7 @@ public class Main extends Application {
         primaryStage.setScene(new Scene(pane, 1200, 800));
         primaryStage.setResizable(false);
         primaryStage.setTitle("Dino");
-        new Menu(pane, primaryStage);
+        new Menu(pane, primaryStage, dino);
 
 
         primaryStage.show();
